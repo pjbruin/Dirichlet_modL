@@ -1,7 +1,9 @@
-# Dirichlet_modL
-Repository for Mod l Dirichlet characters
+# Dirichlet characters mod l 
+In this repository we store raw data for the collection [Dirichlet_char_modl] in the database [mod_l_eigenvalues] for the [LMFDB](https://github.com/LMFDB/lmfdb).
 
 
+# Dirichlet groups mod l
+In this repository we store raw data for the collection [Dirichlet_gp_modl] in the database [mod_l_eigenvalues] for the [LMFDB](https://github.com/LMFDB/lmfdb).
 
 # Finite fields database
 
