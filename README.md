@@ -25,7 +25,7 @@ By CRT, X factors uniquely as X' × Y, where X': (Z/m'Z)* -> GF(&#8467;^d)* and 
 
 The index i is defined by CRT as the unique element of (Z/mZ)* that is i' mod m' and j mod &#8467;^v.
 
-# Lifting characters
+#### Lifting characters
 
 Keep the same notations. Embedding F* into mu(&#8467;^d-1) allows us to lift X into a character (Z/mZ)* -> C*.
 
@@ -33,13 +33,15 @@ If the label of X is &#8467;.d-m-i, then the index of the lift is m.i.
 
 In particular, lifting characters is injective.
 
-# Reducing characters
+#### Reducing characters
 
 Let now X : (Z/mZ)* -> C* be a complex-valued character. Let N be the multiplicative order of X, so that X assumes values in mu(N), and write N = N' × L where L is a power of &#8467;. This corresponds to the decomposition X = X' × Y, where X' assumes values in mu(N') and Y assumes values in mu(L).
 
 Since F* has no l-power torsion, if we want to reduce X to a F*-valued character we must drop Y altogether. We now focus on reducing X'.
 
 Let d be the multipilicative order of (&#8467; mod N'); this is the smallest value such that F* contains a primitive N'-th root of 1, namely z := t^((l^d-1)/N'). We reduce X' by sending e(1/N') to z.
+
+Let m.c be the Conrey label of the character X : (Z/mZ)* -> C* and let l.d-m-i the label of the corresponding reduction. Then i=(j,k) is an element of (Z/mZ)*= (Z/m')*×(Z/&#8467;)* and we have that c=(j, k'): reduction is not injective, ignoring the &#8467;-part there is a canonical way of lifting.
 
 # Dirichlet groups mod &#8467;
 In this repository we store raw data for the collection [Dirichlet_gp_modl] in the database [mod_l_eigenvalues] for the [LMFDB](https://github.com/LMFDB/lmfdb).
