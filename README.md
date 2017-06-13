@@ -7,7 +7,7 @@ Notation:
 * Conway(l,d)(T) is the Conway polynomial of degree d over GF(l) in the indeterminate T
 * F is the model GF(l)[T] / Conway(l,d)(T) of the finite field of size l^d, and t is the image of T in F
 * m is an integer
-* We decompose m as m'*l^v, where m' is prime to l
+* We decompose m as m' × l^v, where m' is prime to l
 * We consider a (not necessarily primitive) character X : (Z/mZ)* -> F*
 * Zl is the ring of l-adic integers
 * Teich : (Z/lZ)* -> Zl* is the Teichmüller lift, so that Teich(x) is the unique (l-1)^th root of 1 that is congruent to x mod l
@@ -17,7 +17,7 @@ Notation:
 
 The label of the character chi is of the form l.d-m-i, where l,d, and m are defined above, and i is an index which lies in (Z/mZ)* which we now define.
 
-By CRT, X factors uniquely as X'*Y, where X': (Z/m'Z)* -> GF(l^d)* and Y : (Z/l^v Z)* -> F*. The m'-part of i will come from X', and the l-part of i will come from Y.
+By CRT, X factors uniquely as X' × Y, where X': (Z/m'Z)* -> GF(l^d)* and Y : (Z/l^v Z)* -> F*. The m'-part of i will come from X', and the l-part of i will come from Y.
 
 * Embed F* into mu(l^d-1) by sending t to e(1/(l^d-1)). This allows us to view X' as a character from (Z/m'Z)* to C*. This character has a Conrey index i' which lies in (Z/m'Z)*.
 
