@@ -39,7 +39,7 @@ Let now X : (Z/mZ)* -> C* be a complex-valued character. Let N be the multiplica
 
 Since F* has no l-power torsion, if we want to reduce X to a F*-valued character we must drop Y altogether. We now focus on reducing X'.
 
-Let d be the order of (&#8467; mod N'); this is the smallest value such that F* contains a primitive N'-th root of 1, namely z := t^((l^d-1)/N'). We reduce X' by sending e(1/N') to z.
+Let d be the multipilicative order of (&#8467; mod N'); this is the smallest value such that F* contains a primitive N'-th root of 1, namely z := t^((l^d-1)/N'). We reduce X' by sending e(1/N') to z.
 
 # Dirichlet groups mod &#8467;
 In this repository we store raw data for the collection [Dirichlet_gp_modl] in the database [mod_l_eigenvalues] for the [LMFDB](https://github.com/LMFDB/lmfdb).
