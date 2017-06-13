@@ -25,7 +25,11 @@ By CRT, X factors uniquely as X' × Y, where X': (Z/m'Z)* -> GF(&#8467;^d)* and 
 
 The index i is defined by CRT as the unique element of (Z/mZ)* that is i' mod m' and j mod &#8467;^v.
 
+# Lifting characters
 
+Keep the same notations. Embedding F* into mu(l^d-1) allows us to lift X into a character (Z/mZ)* -> C*.
+
+If the label of X is l.d-m-i, then the index of the lift is m.i.
 
 # Dirichlet groups mod &#8467;
 In this repository we store raw data for the collection [Dirichlet_gp_modl] in the database [mod_l_eigenvalues] for the [LMFDB](https://github.com/LMFDB/lmfdb).
