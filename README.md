@@ -1,4 +1,4 @@
-# Dirichlet characters mod l 
+# Dirichlet characters mod &#8467;
 In this repository we store raw data for the collection [Dirichlet_char_modl] in the database [mod_l_eigenvalues] for the [LMFDB](https://github.com/LMFDB/lmfdb).
 
 Notation:
@@ -27,7 +27,7 @@ The index i is defined by CRT as the unique element of (Z/mZ)* that is i' mod m'
 
 
 
-# Dirichlet groups mod l
+# Dirichlet groups mod &#8467;
 In this repository we store raw data for the collection [Dirichlet_gp_modl] in the database [mod_l_eigenvalues] for the [LMFDB](https://github.com/LMFDB/lmfdb).
 
 # Finite fields database
