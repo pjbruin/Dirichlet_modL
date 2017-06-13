@@ -10,7 +10,7 @@ Notation:
 * We decompose m as m' × &#8467;^v, where m' is prime to &#8467;
 * We consider a (not necessarily primitive) character X : (Z/mZ)* -> F*
 * Z&#8467; is the ring of &#8467;-adic integers
-* Teich : (Z/&#8467;Z)* -> Z&#8467;* is the Teichmüller lift, so that Teich(x) is the unique (&#8467;-1)^th root of 1 that is congruent to x mod l
+* Teich : (Z/&#8467;Z)* -> Z&#8467;* is the Teichmüller lift, so that Teich(x) is the unique (&#8467;-1)^th root of 1 that is congruent to x mod &#8467;
 * C is the field of the complex numbers
 * mu(n) is the group of n-th roots of 1 in C
 * e(x) is exp(2 Pi I x).
