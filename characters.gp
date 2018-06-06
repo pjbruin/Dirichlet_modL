@@ -114,19 +114,25 @@ dirichlet_characters(l, m, H, Hl) =
 
 generate_data(l_bound, m_bound) =
 {
+   dgroupfile = fileopen("dirichlet_groups.txt", "w");
+   dcharfile = fileopen("dirichlet_characters.txt", "w");
+   gcharfile = fileopen("galois_characters.txt", "w");
    forprime(l = 1, l_bound,
 	    Hl = znstar(l, 1);
 	    for(m = 1, m_bound,
 	       H = znstar(m, 1);
 	       d = znorder(Mod(l, prime_to_l_part(lcm(H.cyc), l)));
 	       if(mapisdefined(conway, [l, d]),
-		  write("dirichlet_groups.txt", dirichlet_group(l, m));
+		  filewrite(dgroupfile, dirichlet_group(l, m));
 		  \\ Dirichlet data for all characters
 		  chars = dirichlet_characters(l, m, H, Hl);
-		  apply(c -> write("dirichlet_characters.txt", c), chars);
+		  apply(c -> filewrite(dcharfile, c), chars);
 		  \\ Artin data for primitive characters
 		  chars = [galois_data(H, c) | c <- chars, c[8]];
-		  apply(c -> write("galois_characters.txt", c), chars))));
+		  apply(c -> filewrite(gcharfile, c), chars))));
+   fileclose(dgroupfile);
+   fileclose(dcharfile);
+   fileclose(gcharfile);
 }
 
 generate_data(5, 6);
