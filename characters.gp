@@ -125,8 +125,8 @@ generate_data(l_bound, m_bound) =
 		  chars = dirichlet_characters(l, m, H, Hl);
 		  apply(c -> write("dirichlet_characters.txt", c), chars);
 		  \\ Artin data for primitive characters
-		  chars = [galois_data(H, c) | c <- chars, c[8]]);
-		  apply(c -> write("galois_characters.txt", c), chars)));
+		  chars = [galois_data(H, c) | c <- chars, c[8]];
+		  apply(c -> write("galois_characters.txt", c), chars))));
 }
 
 generate_data(5, 6);
