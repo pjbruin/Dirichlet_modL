@@ -1,3 +1,11 @@
+/*
+  Script to generate LMFDB data for Dirichlet groups,
+  Dirichlet characters and Galois characters with
+  values in unit groups of finite fields.
+
+  Requires PARI/GP 2.10.1 or higher.
+*/
+
 \r conway.gp
 
 prime_to_l_part(n, l) = n / l^valuation(n, l);
@@ -91,11 +99,12 @@ galois_data(H, chi) =
    m_prime_to_l = prime_to_l_part(m, l);
    factorisation = factorint(m_prime_to_l);
    kernel = charker(H, c);
-   \\ galoissubcyclo does not accept znstar(, 1)
-   subcyclo = galoissubcyclo(znstar(m), kernel, 2);
-   if(subcyclo[2] != m,
-      error("conductors of character and Artin field do not agree"));
-   subcyclo_poly = apply(x->Str(x), Vecrev(polredabs(subcyclo[1])));
+   if(!mapisdefined(subcyclo_cache, kernel, &subcyclo_poly),
+      subcyclo = galoissubcyclo(H, kernel, 2);
+      if(subcyclo[2] != m,
+	 error("conductors of character and Artin field do not agree"));
+      subcyclo_poly = apply(x->Str(x), Vecrev(polredbest(subcyclo[1])));
+      mapput(subcyclo_cache, kernel, subcyclo_poly));
    ["1.1.1.1", 1, "GL", [l, d, f], m_prime_to_l, Col(factorisation)~,
     beta, "", if(o == 1, "trivial", "cyclic"), concat("C", o),
     [1, o == l^d - 1, 1, 1, o == l^d - 1], o, 1, "trivial", "C1", [1, 1],
@@ -117,14 +126,15 @@ generate_data(l_bound, m_bound) =
    dgroupfile = fileopen("dirichlet_groups.txt", "w");
    dcharfile = fileopen("dirichlet_characters.txt", "w");
    gcharfile = fileopen("galois_characters.txt", "w");
-   forprime(l = 1, l_bound,
-	    Hl = znstar(l, 1);
-	    for(m = 1, m_bound,
-	       H = znstar(m, 1);
+   for(m = 1, m_bound,
+      H = znstar(m, 1);
+      subcyclo_cache = Map();
+      forprime(l = 1, l_bound,
 	       d = znorder(Mod(l, prime_to_l_part(lcm(H.cyc), l)));
 	       if(mapisdefined(conway, [l, d]),
 		  filewrite(dgroupfile, dirichlet_group(l, m));
 		  \\ Dirichlet data for all characters
+		  Hl = znstar(l, 1);
 		  chars = dirichlet_characters(l, m, H, Hl);
 		  apply(c -> filewrite(dcharfile, c), chars);
 		  \\ Artin data for primitive characters
