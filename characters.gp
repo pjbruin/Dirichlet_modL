@@ -15,7 +15,7 @@ min_degree(l, m, c) = znorder(Mod(l, znorder(Mod(c, m))));
 
 dirichlet_label(l, m, c) =
 {
-   concat([Str(l), "-", Str(m), ".", Str(c)]);
+   concat([Str(l), "-", Str(m), ".", Str(if(m == 1, 1, c))]);
 }
 
 \\ indices for which c has order not divisible by l
