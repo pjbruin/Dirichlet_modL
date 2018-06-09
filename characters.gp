@@ -144,5 +144,3 @@ generate_data(l_bound, m_bound) =
    fileclose(dcharfile);
    fileclose(gcharfile);
 }
-
-generate_data(5, 6);
