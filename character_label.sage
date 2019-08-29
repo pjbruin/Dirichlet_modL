@@ -19,11 +19,11 @@ def dirichlet_character_label(chi):
     l = G.base_ring().characteristic()
     z = G.zeta()
     o = G.zeta_order()
-    H = pari('idealstar(,{},2)'.format(m))
+    H = pari('znstar({},1)'.format(m))
     cyc = H.getattr('cyc')
     gen = H.getattr('gen')
     v = [chi(g).log(z) * c/o for c, g in zip(cyc, gen)]
-    c = pari('znstar({},1)'.format(m)).znconreyexp(v)
+    c = H.znconreyexp(v)
     return "{}-{}.{}".format(l, m, c)
 
 def dirichlet_character_from_label(label):
@@ -62,9 +62,13 @@ def all_dirichlet_characters(l, m):
          ['7-5.2', [0, 1, 6*a + 4, a + 3, 6]],
          ['7-5.4', [0, 1, 6, 6, 1]],
          ['7-5.3', [0, 1, a + 3, 6*a + 4, 6]]]
-        sage: labels = [x[0] for x in all_dirichlet_characters(11, 55)]
-        sage: chars = map(dirichlet_character_from_label, labels)
-        sage: labels == map(dirichlet_character_label, chars)
+        sage: def test(l, m):
+        ....:     labels = [x[0] for x in all_dirichlet_characters(l, m)]
+        ....:     chars = map(dirichlet_character_from_label, labels)
+        ....:     return labels == map(dirichlet_character_label, chars)
+        sage: test(3, 8)
+        True
+        sage: test(11, 55)
         True
     """
     U = Zmod(m).unit_group()
