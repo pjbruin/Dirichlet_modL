@@ -21,7 +21,7 @@ By CRT, X factors uniquely as X' × Y, where X': (Z/m'Z)* -> GF(&#8467;^d)* and 
 
 * Embed F* into mu(&#8467;^d-1) by sending t to e(1/(l^d-1)). This allows us to view X' as a character from (Z/m'Z)* to C*. This character has a Conrey index i' which lies in (Z/m'Z)*.
 
-* Since F* has no l-torsion, the conductor of Y is either 1 or l. Either way, Y factors as a character (Z/&#8467;Z)* -> F*, which must assume values in GF(l)*. Let Conway(&#8467;,1)=T-g where g in GF(&#8467;)* is a generator of GF(&#8467;)*. Identify canonically (Z/&#8467;Z)* = GF(&#8467;)*, and let h = Y(g), and element of (Z/&#8467;Z)*. Let j be the image of Teich(h) in (Z/&#8467;^v Z)*.
+* Since F* has no l-torsion, the conductor of Y is either 1 or l. Either way, Y factors as a character (Z/&#8467;Z)* -> F*, which must assume values in GF(l)*. Let Conway(&#8467;,1)=T-g where g in GF(&#8467;)* is a generator of GF(&#8467;)*. Identify canonically (Z/&#8467;Z)** = GF(&#8467;)**, and let h = Y(g), and element of (Z/&#8467;Z)*. Let j be the image of Teich(h) in (Z/&#8467;^v Z)*.
 
 The index i is defined by CRT as the unique element of (Z/mZ)* that is i' mod m' and j mod &#8467;^v.
 
@@ -41,7 +41,7 @@ Since F* has no l-power torsion, if we want to reduce X to a F*-valued character
 
 Let d be the multipilicative order of (&#8467; mod N'); this is the smallest value such that F* contains a primitive N'-th root of 1, namely z := t^((l^d-1)/N'). We reduce X' by sending e(1/N') to z.
 
-Let m.c be the Conrey label of the character X : (Z/mZ)* -> C* and let l.d-m-i the label of the corresponding reduction. Then i=(j,k) is an element of (Z/mZ)*= (Z/m')*×(Z/&#8467;)* and we have that c=(j, k'): reduction is not injective, ignoring the &#8467;-part there is a canonical way of lifting.
+Let m.c be the Conrey label of the character X : (Z/mZ)* -> C* and let l.d-m-i the label of the corresponding reduction. Then i=(j,k) is an element of (Z/mZ)*= (Z/m')**×(Z/&#8467;^v)** and we have that c=(j, k'): reduction is not injective, ignoring the &#8467;-part there is a canonical way of lifting.
 
 # Dirichlet groups mod &#8467;
 In this repository we store raw data for the collection [Dirichlet_gp_modl] in the database [mod_l_eigenvalues] for the [LMFDB](https://github.com/LMFDB/lmfdb).
