@@ -10,7 +10,7 @@ Notation:
 * We decompose m as m' × &#8467;^v, where m' is prime to &#8467;
 * We consider a (not necessarily primitive) character X : (Z/mZ)\* -> F\*
 * Z&#8467; is the ring of &#8467;-adic integers
-* Teich : (Z/&#8467;Z)\* -> Z&#8467;\* is the Teichmüller lift, so that Teich(x) is the unique (&#8467;-1)^th root of 1 that is congruent to x mod &#8467;
+* Teich : (Z/&#8467;Z)\* -> Z&#8467;\* is the Teichmüller lift, so that Teich(x) is the unique (&#8467;-1)^th root of 1 that is congruent to x mod &#8467;.  To evaluate Teich(a) modulo &#8467;^v, take any lift of a modulo &#8467;^v and iterate a --> a^&#8467; mod &#8467;^v until it stabilises.
 * C is the field of the complex numbers
 * mu(n) is the group of n-th roots of 1 in C
 * e(x) is exp(2 Pi i x).
@@ -21,7 +21,7 @@ By CRT, X factors uniquely as X' × Y, where X': (Z/m'Z)\* -> F\* and Y : (Z/&#8
 
 * Embed F\* into mu(&#8467;^d-1) by sending t to e(1/(&#8467;^d-1)). This allows us to view X' as a character from (Z/m'Z)\* to C\*. This character has a Conrey index i' which lies in (Z/m'Z)\*.
 
-* Since F\* has no l-torsion, the conductor of Y is either 1 or &#8467;. Either way, Y factors as a character (Z/&#8467;Z)\* -> F\*, which must assume values in GF(&#8467;)\*. Let Conway(&#8467;,1)=T-g where g in GF(&#8467;)\* is a generator of GF(&#8467;)\*. 
+* Since F\* has no l-torsion, Y factors through (Z/&#8467;Z)^* (that is, the conductor of Y is either 1 or &#8467;), and its values are (&#8467;-1)'th roots of unity in F^*, so lie in the prime field  GF(&#8467;)\*. Let Conway(&#8467;,1)=T-g where g in GF(&#8467;)\* is a generator of GF(&#8467;)\*. 
 Identify canonically (Z/&#8467;Z)\* = GF(&#8467;)\*, and let h = Y(g), an element of (Z/&#8467;Z)\*. Let j be the image of Teich(h) in (Z/&#8467;^v Z)\*.
 
 The index i is defined by CRT as the unique element of (Z/mZ)\* that is i' mod m' and j mod &#8467;^v.
