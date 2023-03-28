@@ -1,0 +1,322 @@
+%  FILE DirichletModL_labels.tex
+%
+%
+%  Time-stamp: <2023-03-28 11:54:12 john>
+%
+
+\documentclass[a4paper, 10pt]{amsart}
+
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{comment}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{defn}{Definition}%[section]
+\newtheorem{rem}[thm]{Remark}
+
+\hfuzz1pc % Don't bother to report overfull boxes if overage is < 1pc
+
+\def\Z{{\mathbb Z}}
+\def\Q{{\mathbb Q}}
+\def\C{{\mathbb C}}
+\def\F{{\mathbb F}}
+\def\Fp{{\mathbb F}_p}
+\def\Fq{{\mathbb F}_q}
+\def\Fl{{\mathbb F}_{\ell}}
+\def\Fld{{\mathbb F}_{\ell^d}}
+\def\Flbar{\overline{{\mathbb F}_{\ell}}}
+\def\ZNs{(\Z/N\Z)^*}
+\def\ZNsh{\widehat{\ZNs}}
+
+\newcommand{\software}[1]{\textsc{#1}{}}
+\newcommand{\Sage}{\software{SageMath}}
+\newcommand{\Magma}{\software{Magma}}
+\newcommand{\Github}{\software{GitHub}}
+\newcommand{\GP}{\software{Pari/GP}}
+
+
+\newcommand{\CLab}[2]{$#1.#2$}
+\newcommand{\DLab}[3]{$#1.#2.#3$}
+\newcommand{\oldDLab}[4]{$#1$-$#2.#3.#4$}
+
+\begin{document}
+
+\title{Dirichlet characters modulo $\ell$ and their labels}
+
+\author{J. E. Cremona}
+\address{Mathematics Institute, University of Warwick, Coventry CV4 7AL, UK}
+\email{John.Cremona@gmail.com.uk}
+\date{\today}
+
+\begin {abstract}
+We describe a systematic labelling scheme for Dirichlet characters in
+prime characteristic $\ell$, which is consistent with the Conrey
+labels for classical complex-valued Dirichlet characters.
+\end {abstract}
+
+\maketitle
+
+
+\section{Introduction}
+In \cite{OldDef}, a possible definition was given for a labelling
+system for Dirichlet characters in characteristic~$\ell$, by analogy
+with the Conrey labels for classical Dirichlet characters.  That
+definition had some inconsistencies, and was rather complicated.
+
+Here we give a new, simpler, definition.  Each character
+$\chi:\ZNs\to\Flbar^*$ will have a well-defined label\footnote{The
+  exact format of the label is open to adjustment, but will contain
+  the same three components $\ell,N,c$; the original definiton had a
+  fourth component $d$ which we feel is redundant.  See the last
+  section for a discussion.} of the form \DLab{\ell}{N}{c} with
+$c\in\ZNs$ such that the map $\chi\mapsto c$ is a group isomorphism
+from the group of all such characters to the $\ell$-coprimary
+subgroup\footnote{By the $\ell$-coprimary subgroup of a finite or
+  torsion abelian group $G$ we mean the subgroup of~$G$ consisting of
+  elements whose order is coprime to~$\ell$.} of~$\ZNs$.
+
+We also show how to reduce classical Dirichlet characters and their
+labels.  In the simplest case, when the Dirichlet character with label
+\CLab{N}{c} has order not divisible by~$\ell$ (which is precisely
+when $c\in\ZNs$ has order coprime to~$\ell$), then its reduction
+has label \DLab{\ell}{N}{c}.
+
+\section{Notation and preliminaries}
+
+As with Conrey labels, our definition relies on fixing once and for
+all isomorphisms between groups which are isomorphic but not
+canonically so.  We first set these up and fix some notation.
+
+\begin{itemize}
+\item $N$ is a positive integer.
+\item $\ZNs$ is the domain of all characters considered;
+\item $\ZNsh$ is the group of classical Dirichlet characters
+  $\chi:U_N\to\C^*$.
+\item $c:\ZNsh\to\ZNs$ is the group isomorphism used in the
+  definition of Conrey labels (recalled below), so that $\chi$ has
+  label \CLab{N}{c(\chi)}.
+\item $\ell$ is a prime number.
+\item for each $d\ge1$, $f_{\ell,d}(X) \in \Fl[X]$ is the Conway
+  polynomial of degree $d$ modulo~$\ell$ as defined by R.~Parker (see
+  \cite{ConwayPol}); the properties of these will be recalled below.
+\item for each $d\ge1$, $\Fld=\Fl[X]/(f_{\ell,d})$ is the specific
+  model for the extension of $\Fl$ of degree $d$ defined by the Conway
+  polynomial of degree $d$, with the associated structure as
+  $\Fl[X]$-algebra (and not just as $\Fl$-algebra); $z_d\in\Fld^*$ is
+  the image of $X$ in $\Fld=\Fl[X]/(f_{\ell,d})$; it is a generator of
+  the cyclic group~$\Fld^*$, and $\Fld=\Fl[z_d]$.  Properties of
+  Conway polynomials mean that we may embed
+  $\Fld\hookrightarrow\F_{\ell^{de}}$ via $z_d\mapsto
+  z_{de}^{(\ell^{de}-1)/(\ell^d-1)}$.
+\item For $r\in\Q$, define $e(r)=\exp(2\pi ir)$, so that $e$ induces an
+  isomorphism from~$\Q/\Z$ to the group of all complex roots of unity.
+\item for each $d\ge1$ we fix the isomorphism
+  $\Fld^*\cong\mu_{\ell^d-1}(\C)$, the group of complex roots of unity
+  of order dividing $\ell^d-1$, mapping $z_d$ to $e(1/(\ell^d-1))$;
+\item taking the direct limit over all $d\ge1$ gives a fixed
+  isomorphism $\Flbar^*\cong\mu^{(\ell)}(\C)$, where
+  $\mu^{(\ell)}(\C)$ denotes the group of complex roots of unity of
+  order coprime to $\ell$; both these groups are isomorphic to the
+  $\ell$-coprimary subgroup of $\Q/\Z$, and hence to
+  $\oplus_{p\not=\ell}(\Q_p/\Z_p)$.
+\end{itemize}
+
+\subsection{Conrey labels}
+We briefly recall the definition of Conrey labels, which relies on
+defining a specific isomorphism $\ZNsh\to\ZNs$.  See
+\cite{ConreyLabels} for more details. By the Chinese Remainder Theorem
+it suffices to consider the case where $N$ is a prime power, $N=p^e$.
+
+
+For $p$ odd the group $\ZNs$ is cyclic.  Fix $g_p$ to be the smallest
+positive integer generating $U_{p^e}$ for all~$e\ge1$.  For
+$\chi\in\ZNsh$, define $c(\chi)\in\ZNs$ by $\chi(g_p) =
+e(c(\chi)/\varphi(N))$.
+
+For $N=2^e$ with $e\ge3$ (the cases $e=1,2$ being trivial) we note
+that $\ZNs$ is generated by $-1$ and~$5$, and define
+$c(\chi)=\chi(-1)c_1$ where $\chi(5) = e(c_1(\chi)/\varphi(N))$.
+
+\subsection{Conway polynomials}
+We do not define the Conway polynomials $f_{\ell,d}$ here but refer to
+\cite{ConwayPol}, and recall their relevant properties:
+\begin{enumerate}
+\item Each $f_{\ell,d}\in\Fl[X]$ is \emph{irreducible} of degree~$d$.
+\item Each $f_{\ell,d}$ is \emph{primitive}, meaning that its roots
+  in~$\Fld$ have order $\ell^d-1$ and so generate the multiplicative
+  group~$\Fld^*$.
+\item The $f_{\ell,d}$ for $d\ge1$, ordered by divisibility, are
+  \emph{coherent}, meaning that if $z$ is a root of $f_{\ell,de}$ for
+  $e\ge1$, then $z^{(\ell^{de}-1)/(\ell^d-1)}$ is a root
+  of~$f_{\ell,d}$.
+\end{enumerate}
+Using the coherence property, if for each~$d\ge1$ we define
+$z_d\in\Fld^*$ to be the image of $X$ in the model $\Fld =
+\Fl[X]/(f_{\ell,d})$, then:
+\begin{enumerate}
+\item each $z_d$ generates the multiplicative group $\Fld^*$;
+\item $z_{de}^{(\ell^{de}-1)/(\ell^d-1)}=z_d$, in the sense that the
+  inclusion $\Fld\hookrightarrow\F_{l^{de}}$ is induced by $X\mapsto
+  X^{(\ell^{de}-1)/(\ell^d-1)}$ and so sends $z_d$
+  to~$z_{de}^{(\ell^{de}-1)/(\ell^d-1)}$;
+\item this coherent choice of generators $z_d$ defines isomorphisms
+  $\Fld^*\to\mu_{\ell^d-1}(\C)$ via $z_d\mapsto e(1/(\ell^d-1))$.
+\end{enumerate}
+
+\section{Definition of Dirichlet character modulo $\ell$}
+
+\begin{defn} A \emph{Dirichlet character modulo~$\ell$}, or a
+  \emph{mod-$\ell$ Dirichlet character}, with modulus $N$, is a group
+  homomorphism
+  \[
+  \chi:  \ZNs \to \Flbar^*.
+  \]
+\end{defn}
+Note that in this definition, the codomain of a mod-$\ell$ character
+is~$\Flbar^*$ rather than the multiplicative group of a specific
+finite field~$\Fld$.  Since $\ZNs$ is finite of order $\varphi(N)$,
+each character has finite image, and the images of all characters (for
+fixed~$N$) will lie in $\Fld$ for $d$ satisfying
+$\ell^d\equiv1\pmod{m}$, where $m$ is the coprime-to-$\ell$ part
+of~$\varphi(N)$ (or even of the exponent of the group~$\ZNs$, rather
+than its order).  This definition is more convenient than allowing
+different characters to have different codomains $\Fld^*$ for
+different~$d$.  In particular, if a character is defined by a
+homomorphism $\ZNs\to\Fld^*$ for some specific $d$, and then the
+codomain is extended to~$\F_{l^{de}}^*$, we will not regard the
+resulting composite as a different character, and its label will not
+change.
+
+Since $\Flbar^*$ has no $\ell$-torsion, the order~$m$ of every
+mod-$\ell$ character~$\chi$ is coprime to~$\ell$, and the values
+of~$\chi$ lie in $\Fld^*$, where $d$ is the multiplicative order
+of~$\ell$ modulo~$m$.
+
+\subsection{Lifting characters and the definition of labels}
+
+Let $\chi: \ZNs \to \Flbar^*$ be a mod-$\ell$ Dirichlet character
+of order~$m$, and let $d\ge1$ be the multiplicative order of $\ell$
+modulo~$m$, so that $m\mid\ell^d-1$ and the values of~$\chi$ lie in
+$\Fld^*$.  Composing with our fixed isomorphism $\Fld^* \to
+\mu_{\ell^d-1}(\C)$, mapping $z_d\mapsto e(1/(\ell^d-1))$, gives a
+classical Dirichlet character $\ZNs\to\C^*$, which we denote
+$\tilde{\chi}$.  We say that $\tilde{\chi}$ is the \emph{lift} of
+$\chi$ to characteristic zero.
+
+Because of our choice of Conway models for finite fields and the
+coherence property of the generators $z_d$, the definition of
+$\tilde{\chi}$ is unchanged if we replace $\Fld^*$ by any extension
+of~$\Fl$ containing the values of~$\chi$.
+
+We define the label of $\chi$ to be \DLab{\ell}{N}{c}, where
+\CLab{N}{c} is the label of~$\tilde{\chi}$.
+
+\section{Reduction of characters and their labels}
+
+Now let $\chi\in\ZNsh$ be a classical Dirichlet character, of
+order~$m$ and label \CLab{N}{c}.  By definition of Conrey labels, $m$
+is also the multiplicative order of $c\in\ZNs$.  We will define a
+mod-$\ell$ Dirichlet character (with the same modulus $N$), called the
+reduction of $\chi$ modulo~$\ell$, and denoted $\overline{\chi}$, and
+will see how to determine its label from that of~$\chi$.
+
+The definition needs to take into account the fact that~$m$, the order
+of $\chi$, may not be coprime to $\ell$.  Such characters exist, with
+modulus $N$, if\footnote{In \cite{OldDef} there seems to be an
+  assumption that this can occur if and only if $\ell\mid N$, which is
+  incorrect.} and only if $\ell\mid\varphi(N)$, which is if and only
+if either $\ell^2\mid N$ or some prime $p\equiv1\pmod{\ell}$
+divides~$N$.
+
+\begin{itemize}
+  \item[Special case:] Assume that $\ell\nmid m$. Let $d$ be the
+    multiplicative order of $\ell$ modulo~$m$, so that $\Fld^*$ has a
+    subgroup of order~$m$, generated by $z_d^{(\ell^d-1)/m}$.  Using
+    our fixed isomorphisms we have an injection
+    $\mu_m(\C)\hookrightarrow\Fld^*\hookrightarrow\Flbar^*$, mapping
+    $e(1/m)\mapsto z_d^{(\ell^d-1)/m}$.  Composing $\chi$ with this
+    injection we obtain a mod-$\ell$ character which we
+    denote~$\overline{\chi}$, of the same order as~$\chi$, and such
+    that $\tilde{\overline{\chi}}=\chi$.  Hence the label of
+    $\overline{\chi}$ is \DLab{\ell}{N}{c}, with the same value
+    $c\in\ZNs$ as in the label \CLab{N}{c} of the original character
+    $\chi$.
+
+    Note that the definition of $\overline{\chi}$ does not depend on
+    which extension $\Fld$ of $\Fl$ we use here, provided that it
+    contains the $m$th roots of unity, that is provided that
+    $\ell^d\equiv1\mod{m}$.
+
+    \item[General case:] In general, write $m=m_1\ell^k$ where
+      $\ell\nmid m_1$ and $k\ge0$.  Then $\chi$ has a unique
+      factorization as $\chi=\chi_1\chi_{\ell}$ where $\chi_1$ has
+      order~$m_1$ and $\chi_{\ell}$ has order~$\ell^k$.  Explicitly,
+      let $u,v$ be integers such that $1=m_1u+\ell^kv$; then
+      $\chi_1=\chi^{\ell^kv}$ and $\chi_{\ell}=\chi^{m_1u}$, both
+      being independent of the choice of $u,v$.  (When $k=0$ we may
+      take $u=0$, $v=1$, so that $\chi_1=\chi$; this is the special
+      case already handled.)
+
+      Now we define $\overline{\chi}=\overline{\chi_1}$, the latter
+      being defined as in the special case.  The label of $\chi_1$ is
+      \CLab{N}{c_1}, where $c_1\equiv c^{\ell^kv}\pmod{N}$, since the
+      map from Dirichlet characters to the second component of their
+      Conrey label is an isomorphism $\ZNsh\to\ZNs$.  Hence the label
+      of $\chi$ is \DLab{\ell}{N}{c_1}.
+\end{itemize}
+
+\section{Additional remarks}
+\begin{enumerate}
+\item
+  The set of all mod-$\ell$ Dirichlet characters with a fixed modulus
+  $N$ forms a group.  The map from a character with label
+  \DLab{\ell}{N}{c} to the last component~$c$ is an isomorphism from
+  this group to the $\ell$-coprimary subgroup of $\ZNs$.
+\item
+  The reduction map is a group homomorphism from $\ZNsh$ to the group
+  of mod-$\ell$ Dirichlet characters with modulus $N$.  It takes the
+  character with label \CLab{N}{c} to \DLab{\ell}{N}{c_1}, where
+  $c\mapsto c_1$ is the projection from $\ZNs$ to its $\ell$-coprimary
+  subgroup.  This map is only injective when $\ell\nmid\varphi(N)$.
+  In general, the reductions of \CLab{N}{c} and \CLab{N}{c'} are the
+  same if and only if $c/c'$ has order a power of $\ell$.
+\item
+  Lifting gives a splitting to the reduction map, and is an
+  isomorphism from the group of all mod-$\ell$ Dirichlet characters to
+  the $\ell$-coprimary subgroup of $\ZNsh$. In terms of labels it
+  takes \DLab{\ell}{N}{c} to \CLab{N}{c}.
+\item
+  The original definition regarded a mod-$\ell$ character to be a map
+  $\ZNs\to\Fld^*$ for a specific~$d$, and included $d$ in the label:
+  instead of \DLab{\ell}{N}{c}, the label was \oldDLab{\ell}{d}{N}{c}.
+
+  We think that including $d$ in the label is unnecessary, and even
+  confusing, since the character \oldDLab{\ell}{d}{N}{c} is unchanged
+  by replacing $d$ by any multiple of~$d$.  Similarly, the Conrey
+  label \CLab{N}{c} could, but does not, include \ component $m$,
+  meaning that the character values lie in a specific cyclotomic field
+  $\Q(\zeta_m)$.
+
+\item
+  Implementation notes: both \Sage\ and \Magma\ use Conway polynomials
+  by default in constructing finite fields.  It appears that \GP\ does
+  not, and it is not clear whether the user can specify which
+  polynomials to use.
+\end{enumerate}
+
+\begin{thebibliography}{99}
+\bibitem{OldDef} Original version of labels for mod-$\ell$ Dirichlet
+  characters:
+  \url{https://github.com/sanni85/Dirichlet_modL/blob/master/README.md}
+\bibitem{ConreyLabels}
+  Definition of Conrey labels for mod-$\ell$ Dirichlet characters:
+  \url{https://www.lmfdb.org/knowledge/show/character.dirichlet.conrey}
+\bibitem{ConwayPol} Definition of Conway polynomials:
+  \url{http://www.math.rwth-aachen.de/~Frank.Luebeck/data/ConwayPol/index.html}.
+\end{thebibliography}
+
+\end{document}
+
