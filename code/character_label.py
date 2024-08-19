@@ -27,7 +27,7 @@
 
 def dirichlet_character_label(chi):
     """
-    Return the LMFDB label of `\chi`.
+    Return the LMFDB label of `\\chi`.
 
     INPUT:
 
@@ -59,21 +59,22 @@ def dirichlet_character_from_label(label):
         sage: chi(46)
         2
     """
-    l, mc = label.split('-')
-    m, c = mc.split('.')
-    l, m, c = map(ZZ, (l, m, c))
-    o = Mod(c, m).multiplicative_order()
-    d = Mod(l, o).multiplicative_order()
-    F.<a> = GF(l^d, modulus='conway')
-    G = DirichletGroup(ZZ(m), F, zeta=a)
-    H = pari('znstar({},1)'.format(m))
-    z = a^(G.zeta_order() / o)
-    chi = G([z^(o*H.chareval(c, g)) for g in G.unit_gens()])
+    l, Nc = label.split('-')
+    N, c = Nc.split('.')
+    l, N, c = map(ZZ, (l, N, c))
+    m = Mod(c, N).multiplicative_order() # order of chi
+    d = Mod(l, m).multiplicative_order() # extension degree
+    F = GF(l**d, modulus='conway', name='a')
+    a = F.gen()
+    G = DirichletGroup(ZZ(N), F, zeta=a)
+    H = pari('znstar({},1)'.format(N))
+    z = a**(G.zeta_order() / m)
+    chi = G([z**(m*H.chareval(c, g)) for g in G.unit_gens()])
     return chi
 
-def all_dirichlet_characters(l, m):
+def all_dirichlet_characters(l, N):
     """
-    Return labels and values for all Dirichlet characters modulo `m`
+    Return labels and values for all Dirichlet characters modulo `N`
     with values in a suitable finite field of characteristic `l`.
 
     TESTS::
@@ -83,24 +84,25 @@ def all_dirichlet_characters(l, m):
          ['7-5.2', [0, 1, 6*a + 4, a + 3, 6]],
          ['7-5.4', [0, 1, 6, 6, 1]],
          ['7-5.3', [0, 1, a + 3, 6*a + 4, 6]]]
-        sage: def test(l, m):
-        ....:     labels = [x[0] for x in all_dirichlet_characters(l, m)]
-        ....:     chars = map(dirichlet_character_from_label, labels)
-        ....:     return labels == map(dirichlet_character_label, chars)
+        sage: def test(l, N):
+        ....:     labels = [x[0] for x in all_dirichlet_characters(l, N)]
+        ....:     chars = [dirichlet_character_from_label(lab) for lab in labels]
+        ....:     return labels == [dirichlet_character_label(chi) for chi in chars]
         sage: test(3, 8)
         True
         sage: test(11, 55)
         True
     """
-    U = Zmod(m).unit_group()
+    U = Zmod(N).unit_group()
     d = Mod(l, U.exponent()).multiplicative_order()
-    F.<a> = GF(l^d, modulus='conway')
-    G = DirichletGroup(m, F, zeta=a)
+    F = GF(l**d, modulus='conway', name='a')
+    a = F.gen()
+    G = DirichletGroup(N, F, zeta=a)
     return [[dirichlet_character_label(chi), chi.values()] for chi in G]
 
 def galois_character_label(chi):
     """
-    Return the LMFDB label of `\chi`.
+    Return the LMFDB label of `\\chi`.
 
     INPUT:
 
