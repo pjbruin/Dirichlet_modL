@@ -1,3 +1,30 @@
+#  Code to compute labels of mod-ell Dirichlet characters, and
+#  construct such characters from their labels.
+#
+#  Original version by Peter Bruin 2017-04-06
+#  Revised by John Cremona 2014-08-19 using enhanced Sage functionality
+#
+#######################################################################
+#
+# Copyright 2024 Peter Bruin, John Cremona
+#
+# This is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the
+# Free Software Foundation; either version 2 of the License, or (at your
+# option) any later version.
+#
+# This code is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+# for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software Foundation,
+# Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+#
+#######################################################################
+
+
 def dirichlet_character_label(chi):
     """
     Return the LMFDB label of `\chi`.
@@ -15,17 +42,10 @@ def dirichlet_character_label(chi):
         '11.1-55-46'
     """
     G = chi.parent()
-    m = G.modulus()
+    N = G.modulus()
     l = G.base_ring().characteristic()
-    d = Mod(l, chi.order()).multiplicative_order()
-    z = G.zeta()
-    o = G.zeta_order()
-    H = pari('idealstar(,{},2)'.format(m))
-    cyc = H.getattr('cyc')
-    gen = H.getattr('gen')
-    v = [chi(g).log(z) * c/o for c, g in zip(cyc, gen)]
-    c = H.znconreyexp(v)
-    return "{}.{}-{}-{}".format(l, d, m, c)
+    c = chi.conrey_number()
+    return f"{l}.{N}.{c}"
 
 def dirichlet_character_from_label(label):
     """
