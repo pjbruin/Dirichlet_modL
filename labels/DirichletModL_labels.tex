@@ -1,7 +1,7 @@
 %  FILE DirichletModL_labels.tex
 %
 %
-%  Time-stamp: <2024-08-19 11:58:32 john>
+%  Time-stamp: <2024-08-19 15:56:37 john>
 %
 
 \documentclass[a4paper, 10pt]{amsart}
@@ -39,7 +39,7 @@
 
 
 \newcommand{\CLab}[2]{$#1.#2$}
-\newcommand{\DLab}[3]{$#1.#2.#3$}
+\newcommand{\DLab}[3]{$#1$-$#2.#3$}
 \newcommand{\oldDLab}[4]{$#1$-$#2.#3.#4$}
 
 \begin{document}
@@ -64,7 +64,10 @@
 \begin {abstract}
 We describe a systematic labelling scheme for Dirichlet characters in
 prime characteristic $\ell$, which is consistent with the Conrey
-labels for classical complex-valued Dirichlet characters.
+labels for classical complex-valued Dirichlet characters.  Each label
+has the form \DLab{\ell}{N}{c} where $ell$ is the prime
+characteristic, $N$ the modulus, and $c$ an integer coprime
+to~$\varphi(N)$ of order coprime to~$\ell$.
 \end {abstract}
 
 \maketitle
@@ -176,7 +179,7 @@ $z_d\in\Fld^*$ to be the image of $X$ in the model $\Fld =
   $\Fld^*\to\mu_{\ell^d-1}(\C)$ via $z_d\mapsto e(1/(\ell^d-1))$.
 \end{enumerate}
 
-\section{Definition of Dirichlet character modulo $\ell$}
+\section{Definition of Dirichlet character modulo \texorpdfstring{$\ell$}{ell}}
 
 \begin{defn} A \emph{Dirichlet character modulo~$\ell$}, or a
   \emph{mod-$\ell$ Dirichlet character}, with modulus $N$, is a group
@@ -313,8 +316,8 @@ divides~$N$.
 \item
   Implementation notes: both \Sage\ and \Magma\ use Conway polynomials
   by default in constructing finite fields.  It appears that \GP\ does
-  not, and it is not clear whether the user can specify which
-  polynomials to use.
+  not, though the user can specify which polynomials to use via the
+  function \texttt{ffgen()}.
 \end{enumerate}
 
 \begin{thebibliography}{99}

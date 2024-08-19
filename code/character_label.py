@@ -45,7 +45,7 @@ def dirichlet_character_label(chi):
     N = G.modulus()
     l = G.base_ring().characteristic()
     c = chi.conrey_number()
-    return f"{l}.{N}.{c}"
+    return f"{l}-{N}.{c}"
 
 def dirichlet_character_from_label(label):
     """
