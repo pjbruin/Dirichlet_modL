@@ -27,7 +27,10 @@
 
 def dirichlet_character_label(chi):
     """
-    Return the LMFDB label of `\\chi`.
+    Return the LMFDB label of ``chi``.
+
+    The label is 'l.N.c' for a character modulo `N` with values in a
+    finite field of characteristic `l`, with Conrey label `c`.
 
     INPUT:
 
@@ -40,6 +43,7 @@ def dirichlet_character_label(chi):
         sage: chi = G([1, 2])
         sage: dirichlet_character_label(chi)
         '11.55.46'
+
     """
     G = chi.parent()
     N = G.modulus()
@@ -51,6 +55,10 @@ def dirichlet_character_from_label(label):
     """
     Return the Dirichlet character with the given LMFDB label.
 
+    The label 'l.N.c' denotes the character modulo `N` with values in
+    a finite field of characteristic `l`, with Conrey label `c`.  To
+    be valid, `c` must be coprime to `l`.
+
     TESTS::
 
         sage: chi = dirichlet_character_from_label('11.55.46')
@@ -58,9 +66,14 @@ def dirichlet_character_from_label(label):
         1
         sage: chi(46)
         2
+
     """
     l, N, c = (ZZ(v) for v in label.split("."))
+    if c<0 or c>=N or c.gcd(N)>1:
+        raise ValueError(f"{label} is not a valid label: {c} should be in the range 0..{N-1} and coprime to {N}")
     m = Mod(c, N).multiplicative_order()     # order of chi
+    if m%l==0:
+        raise ValueError(f"{label} is not a valid label: the order {m} of {c} modulo {N} should not be divisible by {l}")
     d = Mod(l, m).multiplicative_order()     # extension degree
     F = GF(l**d, modulus='conway', name='a') # value field
     a = F.gen()
@@ -90,9 +103,11 @@ def all_dirichlet_characters(l, N):
         True
         sage: test(11, 55)
         True
+        sage: test(11, 121)
+        True
     """
     U = Zmod(N).unit_group()
-    d = Mod(l, U.exponent()).multiplicative_order()
+    d = Mod(l, U.exponent().prime_to_m_part(l)).multiplicative_order()
     F = GF(l**d, modulus='conway', name='a')
     a = F.gen()
     G = DirichletGroup(N, F, zeta=a)
