@@ -39,13 +39,13 @@ def dirichlet_character_label(chi):
         sage: G = DirichletGroup(55, GF(11))
         sage: chi = G([1, 2])
         sage: dirichlet_character_label(chi)
-        '11-55.46'
+        '11.55.46'
     """
     G = chi.parent()
     N = G.modulus()
     l = G.base_ring().characteristic()
     c = chi.conrey_number()
-    return f"{l}-{N}.{c}"
+    return f"{l}.{N}.{c}"
 
 def dirichlet_character_from_label(label):
     """
@@ -53,22 +53,20 @@ def dirichlet_character_from_label(label):
 
     TESTS::
 
-        sage: chi = dirichlet_character_from_label('11-55.46')
+        sage: chi = dirichlet_character_from_label('11.55.46')
         sage: chi(12)
         1
         sage: chi(46)
         2
     """
-    l, Nc = label.split('-')
-    N, c = Nc.split('.')
-    l, N, c = map(ZZ, (l, N, c))
-    m = Mod(c, N).multiplicative_order() # order of chi
-    d = Mod(l, m).multiplicative_order() # extension degree
-    F = GF(l**d, modulus='conway', name='a')
+    l, N, c = (ZZ(v) for v in label.split("."))
+    m = Mod(c, N).multiplicative_order()     # order of chi
+    d = Mod(l, m).multiplicative_order()     # extension degree
+    F = GF(l**d, modulus='conway', name='a') # value field
     a = F.gen()
     G = DirichletGroup(ZZ(N), F, zeta=a)
-    H = pari('znstar({},1)'.format(N))
     z = a**(G.zeta_order() / m)
+    H = pari.znstar(N,1)
     chi = G([z**(m*H.chareval(c, g)) for g in G.unit_gens()])
     return chi
 
@@ -80,10 +78,10 @@ def all_dirichlet_characters(l, N):
     TESTS::
 
         sage: all_dirichlet_characters(7, 5)
-        [['7-5.1', [0, 1, 1, 1, 1]],
-         ['7-5.2', [0, 1, 6*a + 4, a + 3, 6]],
-         ['7-5.4', [0, 1, 6, 6, 1]],
-         ['7-5.3', [0, 1, a + 3, 6*a + 4, 6]]]
+        [['7.5.1', [0, 1, 1, 1, 1]],
+         ['7.5.2', [0, 1, 6*a + 4, a + 3, 6]],
+         ['7.5.4', [0, 1, 6, 6, 1]],
+         ['7.5.3', [0, 1, a + 3, 6*a + 4, 6]]]
         sage: def test(l, N):
         ....:     labels = [x[0] for x in all_dirichlet_characters(l, N)]
         ....:     chars = [dirichlet_character_from_label(lab) for lab in labels]
